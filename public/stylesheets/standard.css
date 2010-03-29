@@ -1,0 +1,159 @@
+
+body {
+	background: #ddd;
+	font-family: Georgia, serif;
+	color: #808080;
+	
+}
+
+a {
+	color: #FF9217;
+}
+a:link { text-decoration:none }
+a:visited { text-decoration:none }
+a:hover { text-decoration:underline }
+a:active { text-decoration:none }
+
+
+#header {
+	background: #fff;
+	border: 1px solid #ccc;
+	color: white;
+	padding: 10px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#menu {
+	background: #fff;
+	padding: 10px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	_width: 573px;
+	font-family: Arial, sans-serif;
+	color: #FF9217;
+	font-size: 18pt;
+}
+
+#menu a {
+	color: #FF9217;
+	padding-left: 30px;
+}
+
+#menu ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#menu li {
+	display:inline;
+	margin-right: 15px;
+	padding:0;
+}
+
+#col1 {
+	float:left;
+	width:450px;
+}
+
+#footer {
+	clear:both;
+	padding:5px 10px;
+}
+
+#col2 {
+	float:right;
+}
+
+
+h1 {
+	font-family: Arial, sans-serif;
+	color: #FF9217;
+	font-size: 32pt;
+}
+
+h1 a {
+	color: #FF9217;
+}
+
+h2 {
+	font-family: Arial, sans-serif;
+	color: #FF9217
+	font-family:Georgia,serif;
+	font-size:11px;
+	font-weight:normal;
+	letter-spacing:1px;
+	line-height:1.4em;
+	margin:7px 0 4px;
+}
+
+.journals_used {
+	color:#AEB0B3;
+	white-space:nowrap;
+}
+
+#wrap {
+	width: 900px;
+	margin:0 auto;
+}
+
+.line {
+	border-bottom:1px solid #808080;
+	border-top:1px solid #808080;
+	height:1px;
+}
+
+.display {
+	width: 426px;
+}
+
+.wide_top {
+	background:url("../images/half_top_white.png") no-repeat scroll left top transparent;
+	height:24px;
+	padding-left:24px;
+	padding-right:24px;
+	padding-top:20px;
+}
+
+.wide_title {
+	font-family: Arial, sans-serif;
+	color: #FF9217
+	font-size: 14pt;
+}
+
+.wide_center {
+	background:url("../images/half_center_white.png") repeat-y scroll left top transparent;
+	padding:3px 24px 5px;
+}
+
+.wide_bottom {
+	background:url("../images/half_bottom_white.png") no-repeat scroll left top transparent;
+	height:22px;
+}
+
+.single_number {
+	padding-top: 10px;
+	color:#FF9217;
+	font-family:Helvetica,Arial,sans-serif;
+	font-size:95px;
+	font-weight:bold;
+	letter-spacing:-5px;
+	line-height:97px;
+	width:374px;
+}
+
+.small_number {
+	color:#FF9217;
+	font-family:Helvetica,Arial,sans-serif;
+	font-size:20px;
+	font-weight:bold;	
+}
