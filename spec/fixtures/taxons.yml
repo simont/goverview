@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+1:
+  genus: Rattus
+  species: norvegicus
+  ncbi_taxon_id: 10116
+
+2:
+  genus: Mus
+  species: musculus
+  ncbi_taxon_id: 10090
