@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100314162651) do
+ActiveRecord::Schema.define(:version => 20100325041343) do
 
   create_table "annotations", :force => true do |t|
     t.string   "db"
@@ -31,11 +31,55 @@ ActiveRecord::Schema.define(:version => 20100314162651) do
     t.integer  "publication_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "taxon_id"
+  end
+
+  add_index "annotations", ["db"], :name => "db_index"
+
+  create_table "authors", :force => true do |t|
+    t.string   "name_plus_initials"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authors_publications", :id => false, :force => true do |t|
+    t.integer "author_id"
+    t.integer "publication_id"
+  end
+
+  create_table "journals", :force => true do |t|
+    t.string   "title"
+    t.string   "abbrev_title"
+    t.string   "pissn"
+    t.string   "eissn"
+    t.string   "participation_level", :default => "none"
+    t.string   "open_access",         :default => "no"
+    t.string   "free_access",         :default => "none"
+    t.string   "home_page_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "publications", :force => true do |t|
     t.integer  "pmid"
     t.text     "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "year"
+    t.string   "journal_title"
+    t.string   "volume"
+    t.string   "issue"
+    t.string   "pages"
+    t.text     "affiliation"
+    t.string   "publication_type"
+    t.integer  "journal_id"
+  end
+
+  create_table "taxons", :force => true do |t|
+    t.integer  "ncbi_taxon_id"
+    t.string   "genus"
+    t.string   "species"
+    t.string   "common_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

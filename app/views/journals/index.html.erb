@@ -1,0 +1,45 @@
+<% title "of the journals in the current GOverview dataset" %>
+
+<div id="col1">
+	<div class="display">
+		<div class="wide_top">JOURNALS</div>
+		<div class="wide_center">
+			<h2 class="display_title">TOTAL JOURNALS IN THE DATABASE</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@journal_count) %>
+			</div>
+			<h2 class="display_title">OPEN ACCESS</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@oa_journal_count) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+		
+</div>
+
+<div id="col2">
+
+	<div class="display">
+		<div class="wide_top">MOST POPULAR</div>
+		<div class="wide_center">
+			<h2 class="display_title">ORDERED BY NUMBER OF CURATED PUBLICATIONS</h2>
+			<div class="line"></div>
+			<div class="ordered_list">
+				<ol>
+					<% @top_journals.each do |j| %>
+					<li><%= link_to j.abbrev_title, :controller => "journals", :action => "show", :id => j.id %>
+						<% if j.open_access != "no" && j.open_access != "0" %>
+						<%= image_tag("OA-icon.gif", :alt => "OA", :title => "Open Access: #{j.open_access}") %>
+						<% end %>
+						: <%= j.total %></li>
+						<% end %>
+				</ol>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+
+</div>

@@ -1,0 +1,46 @@
+<% title "of the journal #{@journal.abbrev_title}" %>
+
+<div id="col1">
+
+	
+	<div class="display">
+		<div class="wide_top"><%= @journal.abbrev_title %></div>
+		<div class="wide_center">
+			<h2 class="display_title">NUMBER OF PUBLICATIONS USED</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@journal.publications.size) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+
+</div>
+
+<div id="col2">
+
+	<div class="display">
+		<div class="wide_top">ANNOTATIONS</div>
+		<div class="wide_center">
+			<h2 class="display_title">MOLECULAR FUNCTION</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@journal_annotations['F']) %>
+			</div>
+
+			<h2 class="display_title">BIOLOGICAL PROCESS</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@journal_annotations['P']) %>
+			</div>
+
+			<h2 class="display_title">CELLULAR COMPONENT</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@journal_annotations['C']) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	
+</div>

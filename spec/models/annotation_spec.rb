@@ -47,6 +47,9 @@ END
     first.db.should == 'RGD'
     first.aspect.should == 'P'
     first.assigned_by.should =='UniProtKB'
+    first.taxon.ncbi_taxon_id.should == 10116
+    first.date.to_s.should == "2008-03-10 00:00:00 UTC"
+    first.go_id.should == '0000019'
   
     annot_w_pmid = Annotation.find_by_db_object_id('3602')
     annot_w_pmid.db_object_symbol.should == 'Rps6'
@@ -72,6 +75,7 @@ END
     pub2 = Annotation.create_pub_from_gaf_db_reference(['RGD:2299045','PMID:3378620'])
     Publication.find(:all).size.should == 1
   end
+
   
 end
 
@@ -81,6 +85,10 @@ describe "create new pubs along with annotations" do
       @gaf_data = <<END
 RGD	3602	Rps6		GO:0000028	RGD:2299075|PMID:3378611	IMP		P	ribosomal protein S6		gene	taxon:10116	20080811	RGD
 END
+
+@gaf_data_2 = <<END
+RGD	3602	Rps6		GO:0000028	RGD:2299075|PMID:3378611|PMID:432123	IMP		P	ribosomal protein S6		gene	taxon:10116	20080811	RGD
+END
   end
 
     it "should create publication records along with annotation records" do
@@ -89,8 +97,32 @@ END
         first.db_object_symbol.should == 'Rps6'
         first.publication.pmid.should_not == nil
         first.publication.pmid.should == 3378611
+        first.publication.is_stub?.should == true
+        
       end
-      
-      
+  end
+  
+  it "should be able to create multiple pub records" do
+    
+    pending
+
+  end
+end
+
+describe "create new taxon records with annotations" do
+  
+  before :each do
+      @gaf_data = <<END
+RGD	3602	Rps6		GO:0000028	RGD:2299075|PMID:3378611	IMP		P	ribosomal protein S6		gene	taxon:10116	20080811	RGD
+END
+  end
+  
+  it "should create a new taxon record" do
+    Bio::GO::GeneAssociation.parser(@gaf_data).each do |entry|
+      entry.taxon.should == 'taxon:10116'
+      taxon = Annotation.create_taxon_from_gaf_taxon(entry.taxon)
+      taxon.ncbi_taxon_id.should == 10116
+      # first = Annotation.create_from_gaf(entry)
+    end
   end
 end

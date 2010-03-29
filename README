@@ -12,3 +12,18 @@ Get the Pubmed info for each pub - Authors, Journal, publication date
 * can rank journals - number of pubs generating GO annotations, average number of GO annotations per pub
 ** Could figure out how many articles were published by journal in a year/month and see what proportion are curated, how many annotations they provide
 * can rank authors - number of annotations from their pubs (author mismatches will mess this up)
+
+== BioRuby
+
+Im using BioRuby to handle the PubMed access and record parsing
+
+== TO DO
+
+WITH field, 
+
+Publication affiliation address/email (For lat/long and map view)
+Reload older pubs to get publication year and authors correct
+
+Reload earlier GAF to get extra fields
+
+Clone/fix BioRuby GAF parser

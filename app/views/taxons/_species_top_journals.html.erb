@@ -1,0 +1,17 @@
+<table>
+	<tr><th>OA</th><th>Journal</th><th># Pubs</th></tr>
+	<% species_top_journals.each do |j| %>
+	<tr>
+		<% if j[0] != nil  %>
+			<td><% if j[0].open_access != "no" && j[0].open_access != "0" %>
+					<%= image_tag("OA-icon.gif", :alt => "OA", :title => "Open Access: #{j[0].open_access}") %>
+				<% end %></td>
+			<td><%= link_to j[0].abbrev_title, :controller => "journals", :action => "show", :id => j[0].id %></td>
+			<td><%= j[1] %></td>
+		<% else %>
+			<td colspan="2">nil </td>
+			<td><%= j[1] %></td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>

@@ -5,6 +5,7 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+require 'memcache'
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -38,4 +39,27 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
+  memcache_options = {
+    :c_threshold => 10000,
+    :compression => true,
+    :debug => false,
+    :namespace => 'some_ns',
+    :readonly => false,
+    :urlencode => false
+  }
+
+  CACHE = MemCache.new memcache_options
+  CACHE.servers = '127.0.0.1:11211'
+  begin
+     PhusionPassenger.on_event(:starting_worker_process) do |forked|
+       if forked
+         # We're in smart spawning mode, so...
+         # Close duplicated memcached connections - they will open themselves
+         CACHE.reset
+       end
+     end
+  # In case you're not running under Passenger (i.e. devmode with mongrel)
+  rescue NameError => error
+  end
 end

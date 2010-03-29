@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<title>GOverview - <%= yield(:title) || "of the Gene Ontology" %></title>
+  <%= stylesheet_link_tag 'standard' %>
+  <%= javascript_include_tag  :defaults  %>
+	<link rel="icon" href="/favicon.ico" type="image/ico" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<h1><%= link_to "GOverview of the GO", "/" %></h1>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><%= link_to "Overview", root_path() %></li>
+				<li><%= link_to "Journals", journals_path() %></li>
+				<li><%= link_to "Publications", publications_path() %></li>
+				<li><%= link_to "Annotations", annotations_path() %></li>
+				<li><%= link_to "Species", taxons_path() %></li>
+			</ul>
+		</div>
+		<%= yield %>
+		<div id="footer">
+			GOverview was developed by <a href="<%= obscure_email('mailto:simont@hmgc.mcw.edu') %>">Simon Twigger</a> at the Medical College of Wisconsin
+		</div>
+	</div>
+</body>
+</html>

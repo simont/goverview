@@ -1,0 +1,35 @@
+<% title "of the species in the current GOverview dataset" %>
+
+<div id="col1">
+	
+	<div class="display">
+		<div class="wide_top">SPECIES</div>
+		<div class="wide_center">
+			<h2 class="display_title">TOTAL SPECIES IN THE DATABASE</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@taxon_count) %>
+			</div>
+			<h2 class="display_title">ANNOTATIONS PER SPECIES</h2>
+			<div class="line"></div>
+			<div class="">
+				<ul>
+					<% @annotations_by_taxon.sort_by{|a| a[1]}.each do |tax|
+						if tax[0] != nil
+						taxon = Taxon.find(tax[0])
+						%>
+						<li><%= taxon.genus %> <%= taxon.species %>: <span class="small_number"><%= number_with_delimiter(tax[1]) %></span></li>
+						<% end %>
+						<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	
+</div>
+
+<div id="col2">
+
+	
+</div>

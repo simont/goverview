@@ -1,0 +1,56 @@
+<% title "of the species #{@taxon.genus} #{@taxon.species}" %>
+
+<div id="col1">
+	<div class="display">
+		<div class="wide_top"><%= @taxon.genus %> <%= @taxon.species %></div>
+		<div class="wide_center">
+			<h2 class="display_title">TOTAL ANNOTATIONS</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@taxon.annotations.size) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	
+	<div class="display">
+		<div class="wide_top"><%= @taxon.genus %> <%= @taxon.species %></div>
+		<div class="wide_center">
+			<h2 class="display_title">NUMBER OF DIFFERENT PUBLICATIONS USED</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@total_pubs) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	
+	<div class="display">
+		<div class="wide_top"><%= @taxon.genus %> <%= @taxon.species %></div>
+		<div class="wide_center">
+			<h2 class="display_title">NUMBER OF DIFFERENT JOURNALS USED</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= number_with_delimiter(@journals_total) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+
+</div>
+
+<div id="col2">
+
+	<div class="display">
+		<div class="wide_top"><%= @taxon.genus %> <%= @taxon.species %></div>
+		<div class="wide_center">
+			<h2 class="display_title">PUBLICATION SOURCES <span class="journals_used">(<%= @journals_total %> JOURNALS USED)</span></h2>
+			<div class="line"></div>
+			<div>
+				<%= render :partial => "species_top_journals", :object => @journals %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	
+</div>

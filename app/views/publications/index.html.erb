@@ -1,0 +1,55 @@
+<% title "of the publications in the current GOverview dataset" %>
+
+<div id="col1">
+	<div class="display">
+		<div class="wide_top">BY THE NUMBERS</div>
+		<div class="wide_center">
+			<h2 class="display_title">TOTAL PUBLICATIONS IN THE DATABASE</h2>
+			<div class="line"></div>
+			<div class="single_number">
+				<%= link_to number_with_delimiter(@publication_count) %>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	<div class="display">
+		<div class="wide_top">BY THE NUMBERS</div>
+		<div class="wide_center">
+			<h2 class="display_title">TOTAL PUBLICATIONS USED, BY SPECIES</h2>
+			<div class="line"></div>
+			<div class="">
+				<ul>
+					<% @publications_by_taxon.sort_by{|a| a[1]}.each do |tax|
+						if tax[0] != nil
+							taxon = Taxon.find(tax[0])
+						%>
+						<li><%= taxon.genus %> <%= taxon.species %>: <span class="small_number"><%= number_with_delimiter(tax[1]) %></span></li>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+	
+</div>
+
+<div id="col2">
+
+	<div class="display">
+		<div class="wide_top">TOP 20</div>
+		<div class="wide_center">
+			<h2 class="display_title">TOP 20 PUBLICATIONS, BY TOTAL ANNOTATIONS</h2>
+			<div class="line"></div>
+			<div class="">
+				<ol>
+				<% @top_pubs.each do |pub| %>
+					<li><%= pub.title %>: <%= number_with_delimiter(pub.total) %></li>
+				<% end %>
+				</ol>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
+</div>
+
