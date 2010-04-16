@@ -22,8 +22,10 @@ Im using BioRuby to handle the PubMed access and record parsing
 WITH field, 
 
 Publication affiliation address/email (For lat/long and map view)
-Reload older pubs to get publication year and authors correct
+* Reload older pubs to get publication year and authors correct (In Progress)
 
-Reload earlier GAF to get extra fields
+* Reload earlier GAF to get extra fields
 
-Clone/fix BioRuby GAF parser
+* Clone/fix BioRuby GAF parser to incorporate other columns and new GAF columns
+
+* chart partial not using :object correctly
