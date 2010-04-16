@@ -68,8 +68,8 @@ class Publication < ActiveRecord::Base
   def self.update_stubs_from_pubmed
     pubs_to_update = []
     
-    Publication.find(:all, :conditions => "journal_id is null").each do |pub|
-      if pub.is_stub? && pub.pmid != nil
+    Publication.find(:all, :conditions => "year is null or year = '0000-00-00'").each do |pub|
+      if pub.pmid != nil
         pubs_to_update << pub
       end
     end
@@ -83,7 +83,7 @@ class Publication < ActiveRecord::Base
     puts "There are #{pmid_list.size} pubs to update"
     
     start_index = 0
-    increment = 100
+    increment = 500
     while start_index < pmid_list.size
       
       puts "Getting data for #{start_index} -> #{start_index+increment}"
@@ -101,11 +101,13 @@ class Publication < ActiveRecord::Base
             pub.journal = journal
           end
           
-          # Add in the author records too
-          medline.authors.each do |author|
-            author_record = Author.find_or_create_by_name_plus_initials({'name_plus_initials' => author})
-            author_record.save!
-            pub.authors << author_record
+          if pub.authors.empty?
+            # Add in the author records too
+            medline.authors.each do |author|
+              author_record = Author.find_or_create_by_name_plus_initials({'name_plus_initials' => author})
+              author_record.save!
+              pub.authors << author_record
+            end
           end
           
           pub.save!
