@@ -1,0 +1,67 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	var chart_<%= chart_id %> = new Highcharts.Chart({
+	   chart: {
+	      renderTo: 'container',
+	      defaultSeriesType: 'area'
+	   },
+		title: {
+		      text: ''
+		   },
+	   subtitle: {
+	      text: ''
+	   },
+	   xAxis: {
+			tickInterval: 10,
+	   },
+	   yAxis: {
+	      min: 0,
+	      title: {
+	         text: '<%= y_axis_title || 'Number of pubs' %>'
+	      }
+	   },
+	   legend: {
+	      layout: 'vertical',
+	      backgroundColor: '#FFFFFF',
+	      style: {
+	         left: '100px',
+	         top: '70px',
+	         bottom: 'auto'
+	      }
+	   },
+	   tooltip: {
+	      formatter: function() {
+	         return '<b>'+ this.series.name +'</b><br/>'+
+	            this.x +': '+ this.y +' pubs';
+	      }
+	   },
+	   plotOptions: {
+	      	area: {
+			         pointStart: <%= date_graph.keys.sort.first.to_i %>,
+			         marker: {
+			            enabled: false,
+			            symbol: 'circle',
+			            radius: 2,
+			            states: {
+			               hover: {
+			                  enabled: true
+			               }
+			            }
+			         }
+			      }
+	   },
+	        series: [{
+	      name: 'All Publications',
+	      data: [ <%= date_graph.keys.sort.collect {|v| date_graph[v] }.join(',') %>],
+		  fillColor: '#FF9217',
+
+	   }]
+	});
+
+
+			
+			
+		});
+		</script>
+
+<div id="container" style="width: 450; height: 300px; margin: 0 auto"></div>
