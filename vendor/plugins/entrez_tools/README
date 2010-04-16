@@ -1,0 +1,13 @@
+EntrezTools
+===========
+
+Basic functions to get References from PubMed using the entrez suite of tools, also requires BioRuby.
+
+
+Example
+=======
+
+Example goes here.
+
+
+Copyright (c) 2010 Simon Twigger, released under the MIT license
