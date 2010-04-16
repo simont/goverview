@@ -31,4 +31,18 @@ class ApplicationController < ActionController::Base
     end
     return output
   end
+  
+  def date_range(start)
+    
+    years = Hash["#{start}",0]
+    this_year = Time.now().year
+    while start < this_year
+      start = start + 1
+      years["#{start}"] = 0
+    end
+    
+    return years
+  end
+  
+  
 end
