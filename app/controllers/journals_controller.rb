@@ -29,83 +29,22 @@ class JournalsController < ApplicationController
       @taxon_count = Taxon.count(:all)
       @annotations_by_taxon = Annotation.count(:all, :group => 'taxon_id')
       
-      # my_key = Digest::MD5.hexdigest("get_rat_journals_again")
-      # rat = perform_cache(my_key) {
-      #   get_journals_for_taxon('taxon:10116')
-      # }
-      # 
-      # @rat_journals = rat.sort {|a,b| b[1]<=>a[1]}[0..99]
-      # @rat_journal_total = rat.size
+      pubs =  Publication.count(:all, :group => "YEAR(year)")
       
-      # mouse = Hash.new()
-      #    Annotation.find_all_by_taxon('taxon:10090', :group => :publication_id).each do |annot|
-      #      if annot.publication
-      #        mouse.has_key?(annot.publication.journal) ? mouse[annot.publication.journal] += 1 : mouse[annot.publication.journal] = 1
-      #      end
-      #    end
-      #    @mouse_journals = mouse.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @mouse_journal_total = mouse.size
-      # 
-      #    yeast = Hash.new()
-      #    Annotation.find_all_by_db('SGD', :group => :publication_id ).each do |annot|
-      #      if annot.publication
-      #        yeast.has_key?(annot.publication.journal) ? yeast[annot.publication.journal] += 1 : yeast[annot.publication.journal] = 1
-      #      end
-      #    end
-      # 
-      #    @yeast_journals = yeast.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @yeast_journal_total = yeast.size
-      #  
-      #   fly = Hash.new()
-      #    Annotation.find_all_by_db('FB', :group => :publication_id ).each do |annot|
-      #      if annot.publication
-      #        fly.has_key?(annot.publication.journal) ? fly[annot.publication.journal] += 1 : fly[annot.publication.journal] = 1
-      #      end
-      #    end
-      # 
-      #    @fly_journals = fly.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @fly_journal_total = fly.size
-      #    # Human
-      #     
-      #    human = Hash.new()
-      #    Annotation.find_all_by_taxon('taxon:9606', :group => :publication_id ).each do |annot|
-      #      if annot.publication
-      #        human.has_key?(annot.publication.journal) ? human[annot.publication.journal] += 1 : human[annot.publication.journal] = 1
-      #      end
-      #    end
-      # 
-      #    @human_journals = human.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @human_journal_total = human.size
-      #    
-      #    zfin = Hash.new()
-      #    Annotation.find_all_by_taxon('taxon:7955', :group => :publication_id ).each do |annot|
-      #      if annot.publication
-      #        zfin.has_key?(annot.publication.journal) ? zfin[annot.publication.journal] += 1 : zfin[annot.publication.journal] = 1
-      #      end
-      #    end
-      #    
-      #    @zfin_journals = zfin.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @zfin_journal_total = zfin.size
-      #    
-      #    wb = Hash.new()
-      #    Annotation.find_all_by_taxon('taxon:6239', :group => :publication_id ).each do |annot|
-      #      if annot.publication
-      #        wb.has_key?(annot.publication.journal) ? wb[annot.publication.journal] += 1 : wb[annot.publication.journal] = 1
-      #      end
-      #    end
-      #    
-      #    @wb_journals = wb.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @wb_journal_total = wb.size
-      #    
-      #    dicty = Hash.new()
-      #    Annotation.find_all_by_taxon('taxon:44689', :group => :publication_id ).each do |annot|
-      #      if annot.publication
-      #        dicty.has_key?(annot.publication.journal) ? dicty[annot.publication.journal] += 1 : dicty[annot.publication.journal] = 1
-      #      end
-      #    end
-      #    
-      #    @dicty_journals = dicty.sort {|a,b| b[1]<=>a[1]}[0..99]
-      #    @dicty_journal_total = dicty.size
+      # kludge to get rid of invalide data that will mess up the sort
+      pubs.delete(nil)
+      pubs.delete("0")
+      
+      # get the earliest publication year
+      first_year = pubs.keys.sort.first.to_i
+      @pub_history = date_range(first_year)
+      @pub_history_last_twenty_years =  Hash.new()
+      pubs.each do |year,total|
+        @pub_history["#{year}"] = total
+        if year.to_i > Time.now().year - 20
+          @pub_history_last_twenty_years["#{year}"] = total
+        end
+      end
       
    end
    
