@@ -25,5 +25,6 @@
 			GOverview was developed by <a href="<%= obscure_email('mailto:simont@hmgc.mcw.edu') %>">Simon Twigger</a> at the Medical College of Wisconsin
 		</div>
 	</div>
+<%= render(:partial => "shared/tracking.html.erb") if Rails.env.production? %>
 </body>
 </html>
