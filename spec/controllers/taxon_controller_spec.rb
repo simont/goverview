@@ -6,5 +6,7 @@ describe TaxonController do
   it "should use TaxonController" do
     controller.should be_an_instance_of(TaxonController)
   end
+  
+  
 
 end

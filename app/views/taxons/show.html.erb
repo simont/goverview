@@ -40,6 +40,18 @@
 </div>
 
 <div id="col2">
+	
+	<div class="display">
+		<div class="wide_top"><%= @taxon.genus %> <%= @taxon.species %></div>
+		<div class="wide_center">
+			<h2 class="display_title">PUBLICATION DATES</span></h2>
+			<div class="line"></div>
+			<div>
+				<%= render :partial => 'shared/date_graph', :object => @pub_history, :locals => {:y_axis_title => "Curated publications per year", :chart_id => '1'  }%>
+			</div>
+		</div>
+		<div class="wide_bottom"></div>
+	</div>
 
 	<div class="display">
 		<div class="wide_top"><%= @taxon.genus %> <%= @taxon.species %></div>
